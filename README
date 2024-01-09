@@ -1,0 +1,22 @@
+//program to keep track of steam games that require windows
+//Linux NTFS driver(s) and however the hell steam runs its updates seems to cause corruption for some games (Modern COD games) when allowing steam under a linux distro to directly manage games on an NTFS drives
+//Keeping games managed by the windows steam means that when your friends want to play warzone, its very likely that cod isn't updated
+//mounting the ntfs partition as readonly causes issues where steam wants to compile shaders
+
+
+
+GOALS:
+
+//Keep List of games that a user would like to use Windows to play
+//Store these on the User's least needed drive
+    //have linux update them
+    //when updates are complete, mount the NTFS drive and copy the game directly
+//Have a steam compatibility tool that uses grub-reboot to reboot to windows
+
+//optional - integrated bluetooth syncing for controllers between Windows and Linux
+
+
+DOCS:
+
+https://github.com/Matoking/protontricks/blob/master/src/protontricks/steam.py
+Protontricks steam info
