@@ -1,46 +1,65 @@
 //type of tracking to do,
 //copy as system shuts down'
 //copy asynchronously, when file isn't being changed, etc
-enum trackType{ONSHUTDOWN,ASYNC};
+enum tType{ONSHUTDOWN,ASYNC};
 
-enum dType{LINUX,WINDOWS};
+enum dType{LINUX,WINDOWS}; //what type of drive to treat it as
 
-enum gType{LINUX,PROTON,WINDOWS};
+enum gType{LINUX,PROTON,WINDOWS}; //what OS type to treat the game, native linux,
+                                //proton, or windows game that needs reboot
 
 typedef struct userFile{
     char* steamUserID;
     char* name;
     driveFile* listofDrives;
 
-    Game* ntfsGames; //shorthand for windows games to track and sync
+    gameFile* ntfsGames; //shorthand for windows games to track and sync
 
 
 
 } userFile;
 
 typedef struct driveFile{
-    enum driveType driveT;
+    enum dType driveT;
     int isWindowsCDrive;
     int isReadOnlyonBoot;
     char* name;
     char* mountPoint;
-    winGame* gamesInDrive; //list of games in the drive
+    gameFile* gamesInDrive; //list of games in the drive
 
     //parent
     userFile* parent;
 } driveFile;
 
 
-typedef struct Game{
+typedef struct gameFile{
     char* steamID;
     char* name;
     char* pathToRootFolder;
     char* vdfFileName;
     char* pathToWINEprefix;
-    enum 
+    enum gType gameType;
     enum tType trackingType;
+
+    //if the game has worksshopcontent
+    char* workshopPath;
 
     //parent
     driveFile* parent;
-} winGame;
+} gameFile;
 
+
+userFile* buildUser(){
+
+}
+
+driveFile* buildDFile(){
+
+}
+
+
+gameFile* buildGFile(){
+
+
+
+}

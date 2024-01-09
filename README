@@ -9,6 +9,7 @@ GOALS:
 //Store these on the User's least needed drive
     //have linux update them
     //when updates are complete, mount the NTFS drive and copy the game directly
+//trackworkshopfiles as well
 //Have a steam compatibility tool that uses grub-reboot to reboot to windows
 
 //idea: steam cleanup ubertool to track unused wineprefixes
@@ -16,8 +17,6 @@ GOALS:
 
 //optional - integrated bluetooth syncing for controllers between Windows and Linux
 
-
-First get steam paths
 
 
 DOCS:
