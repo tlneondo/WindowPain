@@ -20,6 +20,8 @@
 
 #define FMT_UNKNOWN_CHAR "Encountered Unknown Character %c (%li)\n"
 
+
+
 static char* local_strndup_escape(const char* s, size_t n)
 {
     if (!s)
@@ -90,6 +92,8 @@ static void print_escaped(const char* s)
         ++s;
     }
 }
+
+
 
 struct vdf_object* vdf_parse_buffer(const char* buffer, size_t size)
 {
@@ -304,6 +308,8 @@ struct vdf_object* vdf_parse_file(const char* path)
 }
 
 
+
+
 size_t vdf_object_get_array_length(const struct vdf_object* o)
 {
     assert(o);
@@ -321,6 +327,8 @@ struct vdf_object* vdf_object_index_array(const struct vdf_object* o, const size
     return o->data.data_array.data_value[index];
 }
 
+
+
 struct vdf_object* vdf_object_index_array_str(const struct vdf_object* o, const char* str)
 {
     if (!o || !str || o->type != VDF_TYPE_ARRAY)
@@ -334,6 +342,8 @@ struct vdf_object* vdf_object_index_array_str(const struct vdf_object* o, const 
     }
     return NULL;
 }
+
+
 
 const char* vdf_object_get_string(const struct vdf_object* o)
 {
