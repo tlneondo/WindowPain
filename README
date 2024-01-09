@@ -16,7 +16,20 @@ GOALS:
 //optional - integrated bluetooth syncing for controllers between Windows and Linux
 
 
+First get steam paths
+
+
 DOCS:
 
 https://github.com/Matoking/protontricks/blob/master/src/protontricks/steam.py
 Protontricks steam info
+
+vdf parsing:
+
+https://github.com/node-steam/vdf
+https://github.com/bobplant/steam-vdf-parser
+
+
+https://dev.to/rapidnerd/using-python-and-c-together-d4e
+
+https://github.com/Jan200101/libofdf
