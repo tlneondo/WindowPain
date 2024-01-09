@@ -3,8 +3,6 @@
 //Keeping games managed by the windows steam means that when your friends want to play warzone, its very likely that cod isn't updated
 //mounting the ntfs partition as readonly causes issues where steam wants to compile shaders
 
-
-
 GOALS:
 
 //Keep List of games that a user would like to use Windows to play
@@ -12,6 +10,9 @@ GOALS:
     //have linux update them
     //when updates are complete, mount the NTFS drive and copy the game directly
 //Have a steam compatibility tool that uses grub-reboot to reboot to windows
+
+//idea: steam cleanup ubertool to track unused wineprefixes
+//renamem to "LGBF"
 
 //optional - integrated bluetooth syncing for controllers between Windows and Linux
 
