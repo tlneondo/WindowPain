@@ -11,6 +11,8 @@ enum gType{LINUX,PROTON,WINDOWS}; //what OS type to treat the game, native linux
 typedef struct userFile{
     char* steamUserID;
     char* name;
+    int numDrives;
+    int NTFSgamecount;
     driveFile* listofDrives;
 
     gameFile* ntfsGames; //shorthand for windows games to track and sync
@@ -49,17 +51,4 @@ typedef struct gameFile{
 } gameFile;
 
 
-userFile* buildUser(){
 
-}
-
-driveFile* buildDFile(){
-
-}
-
-
-gameFile* buildGFile(){
-
-
-
-}
