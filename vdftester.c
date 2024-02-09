@@ -27,6 +27,15 @@ int main(int argc, char *argv[]) {
 
     vdf_print_object(myVDF);
 
+
+    //to get the value of AppState
+    //location of string appstate = myVDF->data.data_array.data_value[7]->key
+    //myVDF->data.data_array.data_value[5]->data
+
+    printf("\n\n%s", myVDF->data.data_array.data_value[3]->key);
+    printf(": %d\n", myVDF->data.data_array.data_value[3]->data);
+
+
     // Close the file
     fclose(file);
 

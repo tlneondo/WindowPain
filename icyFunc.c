@@ -1,6 +1,7 @@
 #include "icyDataTypes.h"
 #include <stdio.h>>
 #include <string.h>
+#include "vdf.h"
 
 //"contructors"
 
@@ -61,18 +62,23 @@ driveFile* buildDFile(enum dType d, int cDrive, int rwob, char* nm, char* mnt, u
 }
 
 
-gameFile* buildGFile(char* id,char* nm, char* rootPath, char* vfn, char* WINEpath, enum gType g, enum tType t){
+gameFile* buildGFile(char* rootPath, char* acf, enum gType g, enum tType t){
     gameFile* newG = malloc(sizeof(gameFile*));
-    newG
+
+    struct vdf_object* myVDF = malloc(sizeof(struct vdf_object));
+    myVDF = vdf_parse_file(acf); //parse acf file
+
+    newG->steamID = myVDF->data.data_array.data_value[0]->data;
+    newG->name = myVDF->data.data_array.data_value[2]->data;
+    newG->folderName = myVDF->data.data_array.data_value[4]->data;
+    newG->state = myVDF->data.data_array.data_value[3]->data;
+    
 
 
 
     //check if there are workshop files
-    if(){
-
-    }
-
-
-
+    vdf_free_object(myVDF);
+    free(myVDF);
+    return newG;
 }
 

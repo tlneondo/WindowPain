@@ -37,9 +37,10 @@ typedef struct driveFile{
 typedef struct gameFile{
     char* steamID;
     char* name;
-    char* pathToRootFolder;
-    char* vdfFileName;
+    char* folderName;
+    char* acfFileName;
     char* pathToWINEprefix;
+    int state;
     enum gType gameType;
     enum tType trackingType;
 
