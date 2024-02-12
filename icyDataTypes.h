@@ -1,20 +1,19 @@
 //type of tracking to do,
 //copy as system shuts down'
 //copy asynchronously, when file isn't being changed, etc
+
+
 enum tType{ONSHUTDOWN,ASYNC};
 
-enum dType{LINUX,WINDOWS}; //what type of drive to treat it as
+enum dType{LINUX,WINDOWS}; //what type of drive to treat it as (what should be the only OS to touch this drive)
 
-enum gType{LINUX,PROTON,WINDOWS}; //what OS type to treat the game, native linux,
-                                //proton, or windows game that needs reboot
+enum gType{LINUX,PROTON,WINDOWS}; //what OS type to treat the game, native linux, proton, or WindowsOnlyGame
+
 
 typedef struct userFile{
     char* steamUserID;
     char* name;
-    int numDrives;
-    int NTFSgamecount;
-    driveFile* listofDrives;
-
+    char* idsOfGamesToTrack;
     gameFile* ntfsGames; //shorthand for windows games to track and sync
 
 
@@ -28,9 +27,6 @@ typedef struct driveFile{
     char* name;
     char* mountPoint;
     gameFile* gamesInDrive; //list of games in the drive
-
-    //parent
-    userFile* parent;
 } driveFile;
 
 
@@ -38,8 +34,6 @@ typedef struct gameFile{
     char* steamID;
     char* name;
     char* folderName;
-    char* acfFileName;
-    char* pathToWINEprefix;
     int state;
     enum gType gameType;
     enum tType trackingType;
@@ -47,9 +41,15 @@ typedef struct gameFile{
     //if the game has worksshopcontent
     char* workshopPath;
 
+    //if this is a game to be synced
+    driveFile* WindowsDrive;
+
     //parent
-    driveFile* parent;
+    driveFile* parentDrive;
 } gameFile;
 
 
 
+int syncGameFile(gameFile* gametoSync);
+
+int addTrackedGame(char* name);

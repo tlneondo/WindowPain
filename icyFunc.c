@@ -6,17 +6,7 @@
 //"contructors"
 
 userFile* buildUser(){
-
     userFile newU = malloc(sizeof(userFile*));
-
-    //get steam user ID from steam folder
-
-    //set name from steam user
-
-
-    //set head of list of files
-
-    newU->listofDrives = malloc(sizeof(driveFile*));
 
 
     
@@ -29,7 +19,6 @@ userFile* buildUser(){
 }
 
 driveFile* buildDFile(enum dType d, int cDrive, int rwob, char* nm, char* mnt, userFile* p){
-
     driveFile* newD = malloc(sizeof(driveFile*));
     newD->driveT = d;
     newD->isWindowsCDrive = cDrive;
@@ -37,23 +26,7 @@ driveFile* buildDFile(enum dType d, int cDrive, int rwob, char* nm, char* mnt, u
     newD->name = malloc(strlen(nm) * sizeof(char*));
     newD->mountPoint = malloc(strlen(mnt) * sizeof(char*));
 
-    /*
-    //count games
-    int count = 0;
-
-
-    newD->gamesInDrive  = malloc(sizeof(gameFile*) * count);
-
-    //pass list of games found to GfileBuilder
-
-    for(int = 0; i < count; i++){
-
-
-
-
-
-    }
-    */
+   
 
     //link to parent user
     newD->parent = p;
@@ -62,7 +35,7 @@ driveFile* buildDFile(enum dType d, int cDrive, int rwob, char* nm, char* mnt, u
 }
 
 
-gameFile* buildGFile(char* rootPath, char* acf, enum gType g, enum tType t){
+gameFile* buildGFile(char* acf, driveFile* parent, gType g, enum tType t, driveFile* WindowsDest ){
     gameFile* newG = malloc(sizeof(gameFile*));
 
     struct vdf_object* myVDF = malloc(sizeof(struct vdf_object));
@@ -72,13 +45,37 @@ gameFile* buildGFile(char* rootPath, char* acf, enum gType g, enum tType t){
     newG->name = myVDF->data.data_array.data_value[2]->data;
     newG->folderName = myVDF->data.data_array.data_value[4]->data;
     newG->state = myVDF->data.data_array.data_value[3]->data;
-    
-
-
+    newG->gameType = g;
+    newG->trackingType = t;
 
     //check if there are workshop files
+
+
+    //set parent
+    newG->parentDrive = parent;
+
+    if(g == WINDOWS){
+        if(WindowsDest == NULL){
+            printf("\n ERROR: Destination Drive not set up.\n");
+            return -1;
+        }else{
+            newG->WindowsDrive = WindowsDest;
+        }
+    }
+
     vdf_free_object(myVDF);
     free(myVDF);
     return newG;
 }
 
+//call system function to rsync to sync folder contained in gamefile object to Windows Drive
+int syncGameFiles(gameFile* gametoSync){
+    if(gametoSync == NULL){
+        return -1;
+        printf("Error in GameFile Sync\n");
+    }
+
+
+
+
+}
