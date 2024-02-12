@@ -74,8 +74,20 @@ int syncGameFiles(gameFile* gametoSync){
         return -1;
         printf("Error in GameFile Sync\n");
     }
+    //get source directories from gamefiles
+    char* source = strcat(gametoSync->parentDrive->steamAppsFolder,gametoSync->folderName);
+    char* sourceACFa = strcat( =gametoSync->parentDrive->steamAppsFolder, "appmanifest_");
+    char* sourceACFb = strcat(sourceACFa, gametoSync->steamID);
+    char* sourceACFfin = strcat(sourceACFb, ".acf");
+    char* dest = strcat(gametoSync->WindowsDrive->steamAppsFolder,gametoSync->folderName);
+    char* destACF = gametoSync->WindowsDrive->steamAppsFolder;
 
+    printf("Syncing Game to Windows Partition\n");
+    //sync folders
+    system("rsync -avu " source " " dest);
+    //sync acf files
+    system("rsync -avu " sourceACFfin " " destACF);
+    printf("Sync Complete\n");
 
-
-
+    return 0;
 }

@@ -26,6 +26,7 @@ typedef struct driveFile{
     int isReadOnlyonBoot;
     char* name;
     char* mountPoint;
+    char* steamAppsFolder;
     gameFile* gamesInDrive; //list of games in the drive
 } driveFile;
 
