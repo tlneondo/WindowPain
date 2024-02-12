@@ -5,20 +5,10 @@
 
 enum tType{ONSHUTDOWN,ASYNC};
 
-enum dType{LINUX,WINDOWS}; //what type of drive to treat it as (what should be the only OS to touch this drive)
+enum dType{LINUXDRIVE,WINDOWSDRIVE}; //what type of drive to treat it as (what should be the only OS to touch this drive)
 
-enum gType{LINUX,PROTON,WINDOWS}; //what OS type to treat the game, native linux, proton, or WindowsOnlyGame
+enum gType{LINUXGAME,PROTONGAME,WINDOWSGAME}; //what OS type to treat the game, native linux, proton, or WindowsOnlyGame
 
-
-typedef struct userFile{
-    char* steamUserID;
-    char* name;
-    char* idsOfGamesToTrack;
-    gameFile* ntfsGames; //shorthand for windows games to track and sync
-
-
-
-} userFile;
 
 typedef struct driveFile{
     enum dType driveT;
@@ -27,7 +17,6 @@ typedef struct driveFile{
     char* name;
     char* mountPoint;
     char* steamAppsFolder;
-    gameFile* gamesInDrive; //list of games in the drive
 } driveFile;
 
 
@@ -48,6 +37,18 @@ typedef struct gameFile{
     //parent
     driveFile* parentDrive;
 } gameFile;
+
+
+
+typedef struct userFile{
+    char* steamUserID;
+    char* name;
+    char* idsOfGamesToTrack;
+    gameFile* ntfsGames; //shorthand for windows games to track and sync
+
+
+
+} userFile;
 
 
 

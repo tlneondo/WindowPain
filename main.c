@@ -1,4 +1,4 @@
-#include "./includes/vdf.h"
+#include "vdf.h"
 #include <stdlib.h>
 
 int main(){
