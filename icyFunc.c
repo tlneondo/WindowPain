@@ -84,9 +84,10 @@ int syncGameFiles(gameFile* gametoSync){
 
     printf("Syncing Game to Windows Partition\n");
     //sync folders
-    system("rsync -avu " source " " dest);
+    system("rsync -avu " source " " dest");
     //sync acf files
-    system("rsync -avu " sourceACFfin " " destACF);
+
+    system("rsync -avu " sourceACFfin " " destACF " ");
     printf("Sync Complete\n");
 
     return 0;
