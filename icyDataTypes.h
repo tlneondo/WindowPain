@@ -16,7 +16,7 @@ typedef struct driveFile{
     int isReadOnlyonBoot;
     char* name;
     char* mountPoint;
-    char* steamAppsFolder;
+    char* steamAppsFolder; //folder location can differ
 } driveFile;
 
 
@@ -43,15 +43,6 @@ typedef struct gameFile{
 typedef struct userFile{
     char* steamUserID;
     char* name;
-    char* idsOfGamesToTrack;
-    gameFile* ntfsGames; //shorthand for windows games to track and sync
-
-
-
+    driveFile** drivesTracked;
+    gameFile** gamesTracked; //list of games
 } userFile;
-
-
-
-int syncGameFile(gameFile* gametoSync);
-
-int addTrackedGame(char* name);

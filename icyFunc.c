@@ -1,21 +1,27 @@
 #include "icyDataTypes.h"
-#include <stdio.h>>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "vdf.h"
 
 //"contructors"
 
-userFile* buildUser(){
-    userFile newU = malloc(sizeof(userFile*));
-
-
-    
-
-    
-
-
-
+userFile* buildUser(char* steamUserID, char * name){
+    userFile* newU = malloc(sizeof(userFile*));
+    newU->drivesTracked = malloc(sizeof(driveFile*));
+    newU->gamesTracked = malloc(sizeof(gameFile*));
     return newU;
+}
+
+void addDrivetoUser(userFile* receive, driveFile* addedD){
+
+
+
+}
+
+void addGametoUser(gameFile* gameAdd, userFile* receive){
+
+
 }
 
 driveFile* buildDFile(enum dType d, int cDrive, int rwob, char* nm, char* mnt, userFile* p){
@@ -25,11 +31,6 @@ driveFile* buildDFile(enum dType d, int cDrive, int rwob, char* nm, char* mnt, u
     newD->isReadOnlyonBoot = rwob;
     newD->name = malloc(strlen(nm) * sizeof(char*));
     newD->mountPoint = malloc(strlen(mnt) * sizeof(char*));
-
-   
-
-    //link to parent user
-    newD->parent = p;
 
     return newD;
 }
