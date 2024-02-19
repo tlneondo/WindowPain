@@ -43,15 +43,15 @@ userFile* buildUser(char* steamID, char* userName){
     userFile* newU = malloc(sizeof(userFile*));
     newU->steamUserID = steamID;
     newU->name = userName;
-    newU->dList = malloc(sizeof(driveList* * 50));
-    newU->gList = malloc(sizeof(gameList* * 50));
+    newU->driveList = malloc(sizeof((driveNode*) * 50));
+    newU->gameList = malloc(sizeof((gameNode*) * 50));
 
     //temp limit of 50 games, 50 drives
 
     return newU;
 }
 
-void addDrivetoUser(userFile* receive, driveFile* addedD){
+void addDrivetoUser(userFile* receive){
 
     struct tempInput{
         enum dType d;
@@ -72,11 +72,23 @@ void addDrivetoUser(userFile* receive, driveFile* addedD){
     printf("Where is this drive mounted?\n");
     tempInput.mnt = getInput();
 
+    driveNode* tempNode;
+    driveNode* tempNodeOld;
 
-    // buildDFile(tempInput.d,tempInput.rwob,tempInput.nm,tempInput.mnt);
+    tempNode = receive->driveList;
+
+    
+    while(tempNode->next != NULL){
+        //iterate to last entry in the node list
+        tempNodeOld = tempNode;
+        tempNode = tempNode->next;
+        tempNodeOld->next = tempNode;
+    }
+
+    tempNode->entry =  buildDFile(tempInput.d,tempInput.rwob,tempInput.nm,tempInput.mnt);
 }
 
-void addGametoUser(gameFile* gameAdd, userFile* receive){
+void addGametoUser(gameFile* gameAdd, userFile* recei-ve){
 
 
 }

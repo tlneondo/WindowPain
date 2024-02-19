@@ -38,23 +38,23 @@ typedef struct gameFile{
     driveFile* parentDrive;
 } gameFile;
 
-typedef struct driveList{
-    driveFile* entry;
-    driveFile* next;
-    int driveCount;    
-} driveList;
+//Nodes in the linked list contain the files
 
-typedef struct gameList{
+typedef struct driveNode{
+    driveFile* entry;
+    struct driveNode* next;  
+} driveNode;
+
+typedef struct gameNode{
     gameFile* entry;
-    gameFile* next;
-    int gameCount;    
-} gameList;
+    struct gameNode* next;   
+} gameNode;
 
 typedef struct userFile{
     char* steamUserID;
     char* name;
-    driveList dList;
-    gameList gList;
+    gameNode* gameList;
+    driveNode* driveList;
 } userFile;
 
 
