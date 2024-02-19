@@ -1,23 +1,79 @@
-#include "icyDataTypes.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "vdf.h"
+#include "icyFunc.h"
 
-//"contructors"
 
-userFile* buildUser(char* steamUserID, char * name){
+
+
+
+//input getter for 100 chars
+
+char* getInput(){
+
+    char input[MAX_INPUT_LENGTH];
+
+    // Print a prompt
+    printf("Enter command (or 'exit' to quit): ");
+
+    // Read input from the user
+    if (fgets(input, sizeof(input), stdin) == NULL) {
+        printf("Error reading input.\n");
+        exit;
+    }
+
+    // Remove trailing newline character
+    input[strcspn(input, "\n")] = '\0';
+
+    // Check if the user wants to exit
+    if (strcmp(input, "exit") == 0) {
+        printf("Exiting program.\n");
+        exit;
+    }
+
+    // Process the input
+    printf("You entered: %s\n", input);
+    return input;
+}
+
+
+
+userFile* buildUser(char* steamID, char* userName){
     userFile* newU = malloc(sizeof(userFile*));
-    newU->dList = malloc(sizeof(driveList*));
-    newU->gList = malloc(sizeof(gameList*));
+    newU->steamUserID = steamID;
+    newU->name = userName;
+    newU->dList = malloc(sizeof(driveList* * 50));
+    newU->gList = malloc(sizeof(gameList* * 50));
+
+    //temp limit of 50 games, 50 drives
 
     return newU;
 }
 
 void addDrivetoUser(userFile* receive, driveFile* addedD){
 
+    struct tempInput{
+        enum dType d;
+        int cDrive;
+        int rwob;
+        char* nm;
+        char* mnt;
+        userFile* p;
+    } tempInput;
+
+    printf("Adding Drive, Please enter info:\n");
+    printf("Please Enter LINUXDRIVE or WINDOWSDRIVE\n");
+    tempInput.d = getInput();
+    printf("Is this drive mounted Read only on Boot?\n");
+    tempInput.rwob = getInput();
+    printf("What should the name of this drive be?");
+    tempInput.nm = getInput();
+    printf("Where is this drive mounted?\n");
+    tempInput.mnt = getInput();
 
 
+    // buildDFile(tempInput.d,tempInput.rwob,tempInput.nm,tempInput.mnt);
 }
 
 void addGametoUser(gameFile* gameAdd, userFile* receive){
@@ -25,11 +81,30 @@ void addGametoUser(gameFile* gameAdd, userFile* receive){
 
 }
 
-driveFile* buildDFile(enum dType d, int cDrive, int rwob, char* nm, char* mnt, userFile* p){
+driveFile* buildDFile(enum dType d,int rwob, char* nm, char* mnt){
     driveFile* newD = malloc(sizeof(driveFile*));
     newD->driveT = d;
-    newD->isWindowsCDrive = cDrive;
+
+    if(d == WINDOWSDRIVE){
+        printf("Is this the main C: drive of a Windows Install? Y or N \n");
+        char YNin = 0;
+
+        while(1){
+            YNin = getInput();
+
+            if( YNin == 'Y' || YNin == 'N'){
+                newD->isWindowsCDrive = YNin;
+                break;
+            }else{
+                printf("Invalid input, please try again.\n");
+            }
+        }
+    }
+
+
+   
     newD->isReadOnlyonBoot = rwob;
+
     newD->name = malloc(strlen(nm) * sizeof(char*));
     newD->mountPoint = malloc(strlen(mnt) * sizeof(char*));
 

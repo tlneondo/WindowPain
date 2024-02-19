@@ -41,18 +41,20 @@ typedef struct gameFile{
 typedef struct driveList{
     driveFile* entry;
     driveFile* next;
+    int driveCount;    
 } driveList;
 
 typedef struct gameList{
     gameFile* entry;
     gameFile* next;
+    int gameCount;    
 } gameList;
 
 typedef struct userFile{
     char* steamUserID;
     char* name;
-    driveList* dList;
-    gameList* gList;
+    driveList dList;
+    gameList gList;
 } userFile;
 
 

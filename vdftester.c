@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "vdf.h"
-#include "icyDataTypes.h"
+#include "icyFunc.h"
 
 
 int main(int argc, char *argv[]) {
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     userFile* testUser = buildUser("123456","icyjiub");
     //add a tracked drive
 
-    
+
 
 
 
