@@ -38,11 +38,21 @@ typedef struct gameFile{
     driveFile* parentDrive;
 } gameFile;
 
+typedef struct driveList{
+    driveFile* entry;
+    driveFile* next;
+} driveList;
 
+typedef struct gameList{
+    gameFile* entry;
+    gameFile* next;
+} gameList;
 
 typedef struct userFile{
     char* steamUserID;
     char* name;
-    driveFile** drivesTracked;
-    gameFile** gamesTracked; //list of games
+    driveList* dList;
+    gameList* gList;
 } userFile;
+
+

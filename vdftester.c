@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "vdf.h"
+#include "icyDataTypes.h"
 
 
 int main(int argc, char *argv[]) {
@@ -32,8 +33,14 @@ int main(int argc, char *argv[]) {
     //location of string appstate = myVDF->data.data_array.data_value[7]->key
     //myVDF->data.data_array.data_value[5]->data
 
-    printf("\n\n%s", myVDF->data.data_array.data_value[3]->key);
-    printf(": %d\n", myVDF->data.data_array.data_value[3]->data);
+    
+    //build user file
+
+    userFile* testUser = buildUser("123456","icyjiub");
+    //add a tracked drive
+
+    
+
 
 
     // Close the file
