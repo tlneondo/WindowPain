@@ -74,8 +74,41 @@ void addDrivetoUser(userFile* receive){
 
     driveNode* tempNode;
     driveNode* tempNodeOld;
-
     tempNode = receive->driveList;
+
+    while(tempNode->next != NULL){
+        //iterate to last entry in the node list
+        tempNodeOld = tempNode;
+        tempNode = tempNode->next;
+        tempNodeOld->next = tempNode;
+    }
+
+    tempNode->entry =  buildDFile(tempInput.d,tempInput.rwob,tempInput.nm,tempInput.mnt);
+
+    return;
+}
+
+void addGametoUser(userFile* receive){
+
+    struct tempInput{
+        
+=
+    } tempInput;
+
+    printf("Adding Drive, Please enter info:\n");
+    printf("Please Enter LINUXDRIVE or WINDOWSDRIVE\n");
+    tempInput.d = getInput();
+    printf("Is this drive mounted Read only on Boot?\n");
+    tempInput.rwob = getInput();
+    printf("What should the name of this drive be?");
+    tempInput.nm = getInput();
+    printf("Where is this drive mounted?\n");
+    tempInput.mnt = getInput();
+
+    gameNode* tempNode;
+    gameNode* tempNodeOld;
+
+    tempNode = receive->gameList;
 
     
     while(tempNode->next != NULL){
@@ -85,12 +118,9 @@ void addDrivetoUser(userFile* receive){
         tempNodeOld->next = tempNode;
     }
 
-    tempNode->entry =  buildDFile(tempInput.d,tempInput.rwob,tempInput.nm,tempInput.mnt);
-}
+    tempNode->entry =  buildGFile();
 
-void addGametoUser(gameFile* gameAdd, userFile* recei-ve){
-
-
+    return;
 }
 
 driveFile* buildDFile(enum dType d,int rwob, char* nm, char* mnt){
@@ -124,7 +154,7 @@ driveFile* buildDFile(enum dType d,int rwob, char* nm, char* mnt){
 }
 
 
-gameFile* buildGFile(char* acf, driveFile* parent, enum gType g, enum tType t, driveFile* WindowsDest ){
+gameFile* buildGFile(enum gType g, enum tType t, char* acf,  driveFile* linuxSource, driveFile* WindowsDest){
     gameFile* newG = malloc(sizeof(gameFile*));
 
     struct vdf_object* myVDF = malloc(sizeof(struct vdf_object));
