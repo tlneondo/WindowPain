@@ -8,8 +8,9 @@
 
 userFile* buildUser(char* steamUserID, char * name){
     userFile* newU = malloc(sizeof(userFile*));
-    newU->drivesTracked = malloc(sizeof(driveFile**));
-    newU->gamesTracked = malloc(sizeof(gameFile**));
+    newU->dList = malloc(sizeof(driveList*));
+    newU->gList = malloc(sizeof(gameList*));
+
     return newU;
 }
 
