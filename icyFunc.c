@@ -72,6 +72,8 @@ void addDrivetoUser(userFile* receive){
     printf("Where is this drive mounted?\n");
     tempInput.mnt = getInput();
 
+    //clean input
+
     driveNode* tempNode;
     driveNode* tempNodeOld;
     tempNode = receive->driveList;
@@ -91,19 +93,35 @@ void addDrivetoUser(userFile* receive){
 void addGametoUser(userFile* receive){
 
     struct tempInput{
-        
-=
+        enum gType g;
+        enum tType t;
+        char* name;
+        char* acf;
+        char* linuxSource;
+        char* WindowsDest;
     } tempInput;
 
-    printf("Adding Drive, Please enter info:\n");
-    printf("Please Enter LINUXDRIVE or WINDOWSDRIVE\n");
-    tempInput.d = getInput();
-    printf("Is this drive mounted Read only on Boot?\n");
-    tempInput.rwob = getInput();
-    printf("What should the name of this drive be?");
-    tempInput.nm = getInput();
-    printf("Where is this drive mounted?\n");
-    tempInput.mnt = getInput();
+    printf("Adding Game, Please enter info:\n");
+    printf("Please Enter Game Type: LINUXGAME, PROTONGAME, or WINDOWSGAME \n");
+    tempInput.g = getInput();
+    printf("What is the Tracking Type?\n");
+    printf("Should this game Sync on Shutdown, or Asynchronously when not being used/updated?\n");
+    printf("Enter ONSHUTDOWN or ASYNC\n");
+    tempInput.t = getInput();
+
+    printf("What is the name of the Game?\n");
+    tempInput.name = getInput();
+
+    printf("What is the acf filename of the file\n");
+    tempInput.acf = getInput();
+
+    printf("What is the mountpoint for the source folder?\n Where is the data that will be copied from stored?\n");
+    tempInput.linuxSource = getInput();
+    printf("What is the mount point of the linux drive?\n");
+    tempInput.WindowsDest = getInput();
+
+    //clean input 
+
 
     gameNode* tempNode;
     gameNode* tempNodeOld;
@@ -118,7 +136,7 @@ void addGametoUser(userFile* receive){
         tempNodeOld->next = tempNode;
     }
 
-    tempNode->entry =  buildGFile();
+    tempNode->entry =  buildGFile(tempInput.g, tempInput.t, tempInput.acf, getDriveFile(tempInput.linuxSource), getDriveFile(tempInput.WindowsDest));
 
     return;
 }
@@ -212,3 +230,14 @@ int syncGameFiles(gameFile* gametoSync){
 
     return 0;
 }
+
+driveFile* getDriveFile(char* dir){
+    driveFile* found;
+
+
+
+
+
+    return found;
+}
+
